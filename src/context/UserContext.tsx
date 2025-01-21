@@ -29,13 +29,16 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const login = async (email: string, password: string) => {
     // Replace with your API call
-    const response = await fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await fetch(
+      "https://journal-app-backend-omega.vercel.app/users",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      }
+    );
     const data = await response.json();
     setUser(data);
   };
@@ -46,13 +49,16 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const register = async (name: string, email: string, password: string) => {
     // Replace with your API call
-    const response = await fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, password }),
-    });
+    const response = await fetch(
+      "https://journal-app-backend-omega.vercel.app/users",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      }
+    );
     const data = await response.json();
     setUser(data);
   };

@@ -10,12 +10,15 @@ export const useJournalEntry = () => {
   >({
     queryKey: ["journal_entries"],
     queryFn: () => {
-      return fetch(`http://localhost:3000/journal_entries/${user?.id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((response) => response.json());
+      return fetch(
+        `https://journal-app-backend-omega.vercel.app/journal_entries/${user?.id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((response) => response.json());
     },
     staleTime: 0,
     enabled: !!user?.id,
@@ -24,7 +27,7 @@ export const useJournalEntry = () => {
   const { mutate: addEntry } = useMutation({
     mutationKey: ["addEntry"],
     mutationFn: (newExpense: JournalEntry) => {
-      fetch("http://localhost:3000/journal_entries", {
+      fetch("https://journal-app-backend-omega.vercel.app/journal_entries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
