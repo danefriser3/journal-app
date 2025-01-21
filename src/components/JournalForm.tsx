@@ -50,7 +50,7 @@ const JournalForm: React.FC<Props> = ({ onSubmit }) => {
           className={`w-full border p-2 shadow-custom rounded ${
             errors.title && "border-red-500"
           }`}
-          rows={5}
+          rows={3}
         />
         {errors.content && (
           <p className="text-red-500">{errors.content.message}</p>
