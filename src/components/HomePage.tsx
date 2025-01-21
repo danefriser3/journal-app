@@ -2,10 +2,12 @@ import { useState } from "react";
 import JournalEntryCard from "../components/JournalEntryCard";
 import JournalForm from "../components/JournalForm";
 import { useJournalEntry } from "../hooks/useJournalEntry";
+import { useIsMutating } from "@tanstack/react-query";
+import { RotatingLines } from "react-loader-spinner";
 
 const HomePage: React.FC = () => {
   const { addEntry, journal_entries: entries } = useJournalEntry();
-
+  const isMutating = useIsMutating();
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,15 +25,21 @@ const HomePage: React.FC = () => {
         </>
       )}
       <hr className="border-black" />
-      <div
-        className={`space-y-4 overflow-auto p-1 ${
-          (open && "h-[480px]") || "h-[764px]"
-        }`}
-      >
-        {entries?.map((entry) => (
-          <JournalEntryCard key={entry.id} entry={entry} />
-        ))}
-      </div>
+      {!isMutating && (
+        <div
+          className={`space-y-4 overflow-auto p-1 ${
+            (open && "h-[480px]") || "h-[764px]"
+          }`}
+        >
+          {entries?.map((entry) => (
+            <JournalEntryCard key={entry.id} entry={entry} />
+          ))}
+          {entries?.length === 0 && (
+            <div className="text-center">No entries</div>
+          )}
+        </div>
+      )}
+      <RotatingLines visible={isMutating !== 0} />
     </div>
   );
 };
