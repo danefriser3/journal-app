@@ -21,7 +21,12 @@ const HomePage: React.FC = () => {
       {open && (
         <>
           <hr className="border-black" />
-          <JournalForm onSubmit={(entry) => addEntry(entry)} />
+          <JournalForm
+            onSubmit={(entry) => {
+              addEntry(entry);
+              setOpen(false);
+            }}
+          />
         </>
       )}
       <hr className="border-black" />
