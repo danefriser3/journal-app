@@ -9,10 +9,17 @@ type RegisterFormInputs = {
 
 export const RegisterForm = () => {
   const { register: registerUser } = useUser();
-  const { register, handleSubmit } = useForm<RegisterFormInputs>();
+  const { register, handleSubmit, reset } = useForm<RegisterFormInputs>({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
 
   const onSubmit = async (data: RegisterFormInputs) => {
     await registerUser(data.name, data.email, data.password);
+    reset();
   };
 
   return (
@@ -20,6 +27,11 @@ export const RegisterForm = () => {
       <div className="w-full md:w-6/12 self-center border p-4 shadow-custom rounded">
         <span>Register</span>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+          <input
+            placeholder="Name"
+            className="p-2 border shadow-custom rounded"
+            {...register("name", { required: true })}
+          />
           <input
             placeholder="Email"
             className="p-2 border shadow-custom rounded"
@@ -36,7 +48,7 @@ export const RegisterForm = () => {
               type="submit"
               className="bg-blue-500 text-white py-2 shadow-custom px-4 rounded hover:bg-blue-600"
             >
-              Login
+              Register
             </button>
           </div>
         </form>

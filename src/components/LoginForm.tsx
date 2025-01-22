@@ -12,8 +12,8 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, watch } = useForm<LoginFormInputs>({
     defaultValues: {
-      email: "parisi_daniele@hotmail.it",
-      password: "Danefriser3@",
+      email: "",
+      password: "",
     },
   });
 
